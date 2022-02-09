@@ -10,22 +10,28 @@ export class RecipeService {
 
   recipeChanged = new Subject<Recipe[]>();
 
-  private recipes: Recipe[] = [
-    new Recipe("Chicken Biryani",
-     "Most sought out dish in India",
-      "https://i.tribune.com.pk/media/images/1590373-biryani-1513939158/1590373-biryani-1513939158.gif",
-      [new Ingredient('rice', 1),
-      new Ingredient('chicken', 2)]
-    ),
-    new Recipe("Burger",
-     "Take away food", 
-     "https://www3.pictures.zimbio.com/mp/wwj1hrnad01x.jpg",
-      [new Ingredient('bread', 1),
-      new Ingredient('meat slice', 1)]
-    )
-  ];
+  // private recipes: Recipe[] = [
+  //   new Recipe("Chicken Biryani",
+  //    "Most sought out dish in India",
+  //     "https://i.tribune.com.pk/media/images/1590373-biryani-1513939158/1590373-biryani-1513939158.gif",
+  //     [new Ingredient('rice', 1),
+  //     new Ingredient('chicken', 2)]
+  //   ),
+  //   new Recipe("Burger",
+  //    "Take away food", 
+  //    "https://www3.pictures.zimbio.com/mp/wwj1hrnad01x.jpg",
+  //     [new Ingredient('bread', 1),
+  //     new Ingredient('meat slice', 1)]
+  //   )
+  // ];
+  private recipes: Recipe[] = [];
   
   constructor(private shoppingListService: ShoppingListService) { }
+
+  setRecipes(recipes: Recipe[]){
+    this.recipes = recipes;
+    this.recipeChanged.next(this.recipes.slice());
+  }
 
   getRecipes(){
     return this.recipes.slice();
